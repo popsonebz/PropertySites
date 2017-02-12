@@ -15,4 +15,29 @@
                     </table>
 </div>
 
+    <!-- The code below performs pagination -->
+
+    <div class="container">
+        {% if leads.has_other_pages %}
+            <ul class="pagination">
+                {% if leads.has_previous %}
+                    <li><a href="?page={{ leads.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+            {% for i in leads.paginator.page_range %}
+                    {% if leads.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+            {% endfor %}
+            {% if leads.has_next %}
+                <li><a href="?page={{ leads.next_page_number }}">&raquo;</a></li>
+            {% else %}
+                <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+            </ul>
+        {% endif %}
+    </div>
 {% endblock %}

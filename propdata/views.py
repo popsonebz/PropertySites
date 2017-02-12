@@ -50,12 +50,21 @@ def agent(request):
         form = AgentForm()
     return render(request, 'propDataAdmin/newAgent.html', {'form': form})
 
-# Display all agents
+# Display all agents (pagination added)
 
 
 def showallagents(request):
 
     agents = Agent.objects.all()
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(agents, 5)
+    try:
+        agents = paginator.page(page)
+    except PageNotAnInteger:
+        agents = paginator.page(1)
+    except EmptyPage:
+        agents = paginator.page(paginator.num_pages)
 
     return render(
         request,
@@ -101,13 +110,21 @@ def showlisting(request):
 
     )
 
-# Show Lead
+# Show Lead (pagination added)
 
 
 def showleads(request):
 
     lead = Lead.objects.all()
 
+    page = request.GET.get('page', 1)
+    paginator = Paginator(lead, 5)
+    try:
+        lead = paginator.page(page)
+    except PageNotAnInteger:
+        lead = paginator.page(1)
+    except EmptyPage:
+        lead = paginator.page(paginator.num_pages)
     return render(
         request,
         'propDataAdmin/showLeads.html', {'leads': lead}
