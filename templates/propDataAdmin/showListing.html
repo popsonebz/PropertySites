@@ -1,0 +1,43 @@
+{% extends 'propDataAdmin/base.html' %}
+ {% load staticfiles %}
+{% block content %}
+
+    <!--This shows the list of all houses added-->
+<div class="table-responsive">
+                    <table class="table table-striped">
+                        <tr><th>Suburb</th><th>Bedrooms</th><th>Price</th><th>Market Heading</th><th>Description</th><th>Owner's Reference</th> <th>Associated Agent</th><th>Picture</th></tr>
+                        {% for listing in listings %}
+                        <tr><th>{{ listing.suburb }}</th><td>{{ listing.bedrooms }}</td><td>{{ listing.price }}</td><td>{{ listing.marketing_Heading }}</td><td>{{ listing.description }}</td><td>{{ listing.owners_Ref_Number }}</td><td>{{ listing.associated_agent }}</td><td>
+                            <img src="{{MEDIA_URL}}{{listing.picture.url}}" width="60" height="60"></td></tr>
+
+                        {% endfor %}
+
+                    </table>
+</div>
+
+    <!-- The code below performs pagination -->
+
+    <div class="container">
+        {% if listings.has_other_pages %}
+            <ul class="pagination">
+                {% if listings.has_previous %}
+                    <li><a href="?page={{ listings.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+            {% for i in listings.paginator.page_range %}
+                    {% if listings.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+            {% endfor %}
+            {% if listings.has_next %}
+                <li><a href="?page={{ listings.next_page_number }}">&raquo;</a></li>
+            {% else %}
+                <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+            </ul>
+        {% endif %}
+    </div>
+{% endblock %}

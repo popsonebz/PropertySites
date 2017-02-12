@@ -1,0 +1,20 @@
+{% extends 'propDataAdmin/base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <!-- This is the addition of new Agent to the system-->
+    <div class="container">
+        <h1>New Agent</h1>
+        <form method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
+
+            {% for field in form %}
+                <fieldset class="form-group">
+                    <div class="col-md-2">
+                        <label class="control-label">{{ field.label }}</label> </div>
+                    <div class="col-md-4">{{ field }} </div>
+                    <div class="col-md-4 text-danger">{{ field.errors }}</div>
+                </fieldset>
+            {% endfor %}
+            <button  type="submit" class="save btn btn-success col-md-3 offset3">Save</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'propDataAdmin/base.html' %}
+ {% load staticfiles %}
+{% block content %}
+
+    <!--Table displaying all Agents in the system-->
+<div class="table-responsive">
+                    <table class="table table-striped">
+                        <tr><th>First Name</th><th>Surname</th><th>Email</th><th>Phone Number</th><th>Picture</th></tr>
+                        {% for agent in agents %}
+                        <tr><th>{{ agent.first_name }}</th><td>{{ agent.last_name }}</td><td>{{ agent.email }}</td><td>{{ agent.cellPhone }}</td><td>
+                            <img src="{{MEDIA_URL}}{{agent.picture.url}}" width="60" height="60"></td></tr>
+
+                        {% endfor %}
+
+                    </table>
+</div>
+
+{% endblock %}

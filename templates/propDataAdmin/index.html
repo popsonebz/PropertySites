@@ -1,0 +1,17 @@
+{% extends 'propDataAdmin/base.html' %}
+{% load staticfiles %}
+{% block title%}Prop Data - Admin Page{% endblock%}
+{% block content %}
+    <!-- These are the links for the Admin home page-->
+    <div class="container">
+        <div class="row">
+                <a href="{% url 'agent' %}" class="btn btn-info" role="button">Add Agent</a>
+                <a href="{% url 'addlisting' %}" class="btn btn-info" role="button">Add Listing</a>
+                <a href="{% url 'showallagents' %}" class="btn btn-info" role="button">Show Agent</a>
+                <a href="{% url 'showlisting' %}" class="btn btn-info" role="button">Show Listing</a>
+                <a href="{% url 'showleads' %}" class="btn btn-info" role="button">Show Leads</a>
+        </div>
+
+
+    </div>
+{% endblock %}

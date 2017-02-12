@@ -1,0 +1,18 @@
+{% extends 'propDataAdmin/base.html' %}
+ {% load staticfiles %}
+{% block content %}
+
+    <!--This is a tabular representation of all Leads in the database who sent mail -->
+<div class="table-responsive">
+                    <table class="table table-striped">
+                        <tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Message</th><th>Property (Owner's Reference)</th></tr>
+                        {% for lead in leads %}
+                        <tr><th>{{ lead.first_name }}</th><td>{{ lead.last_name}}</td><td>{{ lead.email }}</td><td>{{ lead.message }}</td><td>
+                            {{ lead.property }}</td></tr>
+
+                        {% endfor %}
+
+                    </table>
+</div>
+
+{% endblock %}

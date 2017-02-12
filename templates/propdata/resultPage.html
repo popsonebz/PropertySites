@@ -1,0 +1,22 @@
+{% extends 'propdata/base.html' %}
+{% load staticfiles %}
+{% block title%}Prop Data - Search Property{% endblock%}
+
+{% block content%}
+    <!--List of result after searching using searchPage.html-->
+<div class="container">
+    <div class="row">
+        <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tr><th>Picture</th><th>Description</th></tr>
+                        {% for listing in listings %}
+                        <tr><td>
+                            <a href={% url 'detail' listing.id %}><img src="{{MEDIA_URL}}{{listing.picture.url}}" width="60" height="60"></a></td><td>{{ listing.description }}</td></tr>
+
+                        {% endfor %}
+
+                    </table>
+        </div>
+    </div>
+</div>
+{% endblock%}

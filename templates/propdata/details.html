@@ -1,0 +1,59 @@
+{% extends 'propdata/base.html' %}
+{% load staticfiles %}
+{% block title%}Prop Data - Details{% endblock%}
+
+
+{% block content%}
+<div class="container" >
+
+                <!-- Main content : This is details of the specific property clicked after clicking one of the search result on resultPage.html-->
+        <div class="col-md-7">
+            <div class="media">
+                     <div class="media-left">
+                        <a href="#"><img class="media-object pull-left" style="padding-right: 10px;" src="{{MEDIA_URL}}{{house_details.picture.url}}" width="300" height="250" alt="..."></a>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="media-heading" style=" color: green">R {{ house_details.price }}</h3>
+                        <h4 style="color: chartreuse">{{ house_details.marketing_Heading }}</h4>
+                        <p>{{ house_details.description }}</p>
+
+                        <p><span><b>Suburb: </b>{{ house_details.suburb }}</span></p>
+                        <p><span><b>Bedrooms: </b>{{ house_details.bedrooms }}</span></p>
+                        <p><span><b>Owner's Ref: </b>{{ house_details.owners_Ref_Number }}</span></p>
+                        <p><span><b>Associated Agent: </b>{{ house_details.associated_agent }}</span></p>
+
+                    </div>
+            </div>
+        </div>
+        <div class="col-md-4" style="padding-left: 5px; background-color: darkgrey; border: solid green; overflow: auto ">
+
+
+            <!--This is the sidebar-->
+
+            <div>
+
+                <h2>Contact : <span style="color: green">{{ Agent_info.first_name }} {{ Agent_info.last_name }}</span></h2>
+                <h3>Phone :<span style="color: #ba2121">0{{ Agent_info.cellPhone }}</span></h3>
+            </div>
+            <div >
+                 <form method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
+
+                {% for field in contact_agent %}
+                        <fieldset class="form-group">
+
+                        <div class="col-md-4">{{ field }} </div>
+                        <div class="col-md-4 text-danger">{{ field.errors }}</div>
+                        </fieldset>
+                {% endfor %}
+
+
+                <button  type="submit" class="save btn btn-success btn-md">Send Message</button>
+                </form>
+            </div>
+        </div>
+
+</div>
+
+
+
+{% endblock %}
