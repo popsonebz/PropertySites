@@ -146,7 +146,14 @@ def search(request):
             listings = HouseDetails.objects.filter(suburb=content['suburb'], bedrooms=content['bedrooms'],
                                                  price__gte=content['price_from'], price__lte=content['price_to'])
 
-            #print(content['suburb'], content['bedrooms'], content['price_from'], content['price_to'])
+            page = request.GET.get('page', 1)
+            paginator = Paginator(listings, 5)
+            try:
+                listings = paginator.page(page)
+            except PageNotAnInteger:
+                listings = paginator.page(1)
+            except EmptyPage:
+                listings = paginator.page(paginator.num_pages)
             return render(
                 request, 'propdata/resultPage.html', {'listings': listings}
             )
